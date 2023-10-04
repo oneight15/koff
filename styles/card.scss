@@ -1,14 +1,10 @@
 .card {
   position: relative;
 
-
-
   &__link {
     &_img {
       display: block;
       margin-bottom: 12px;
-
-
 
       @media (min-width: 580px) {
         margin-bottom: 16px;
