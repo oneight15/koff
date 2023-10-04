@@ -1,20 +1,81 @@
 .card {
+  position: relative;
+
+
 
   &__link {
+    &_img {
+      display: block;
+      margin-bottom: 12px;
+
+
+
+      @media (min-width: 580px) {
+        margin-bottom: 16px;
+      }
+    }
   }
 
   &__img {
+    width: 100%;
+    object-fit: cover;
+    border-radius: 16px;
+  }
+
+  &__info {
+    @media (min-width: 580px) {
+      display: flex;
+      gap: 5px;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
   }
 
   &__title {
+    font-size: 12px;
+    font-weight: 400;
+    margin-bottom: 4px;
+
+    @media (min-width: 580px) {
+      font-size: 16px;
+      padding-top: 3px;
+      margin-bottom: 0;
+    }
   }
 
   &__price {
+    font-size: 16px;
+    margin-bottom: 12px;
+
+    @media (min-width: 580px) {
+      font-size: 20px;
+      margin-bottom: 0;
+    }
   }
 
   &__btn {
+    width: 100%;
+    padding: 12px 24px;
+    color: #780096;
+    border-radius: 32px;
+    border: 1px solid #780096;
+    outline: none;
+
+    &:hover,
+    &:active {
+      border-color: #9200B7;
+      background-color: #9200B7;
+      color: #fff;
+    }
+
+    &:focus-visible {
+      border-color: #C0F;
+    }
   }
 
   &__favorite {
+    position: absolute;
+    top: 12px;
+    right: 12px;
   }
 }
