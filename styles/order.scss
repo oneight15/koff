@@ -1,21 +1,95 @@
 .order {
+  padding-top: 32px;
+  padding-bottom: 80px;
+
+
+  @media (min-width: 580px) {
+    padding-top: 60px;
+    padding-bottom: 100px;
+  }
 
   &__container {
+    padding-top: 24px;
+    padding-bottom: 24px;
+    border-radius: 16px;
+    border: 1px solid #EEEFF2;
+
+    @media (min-width: 580px) {
+      max-width: 710px;
+      padding: 60px 151px;
+    }
+
+    @media (min-width: 820px) {
+      max-width: 726px;
+      padding: 60px 159px;
+    }
+
+    @media (min-width: 1120px) {
+      max-width: 832px;
+      padding: 60px 212px;
+    }
+  }
+
+
+  &__info {
+    margin-bottom: 20px;
+
+    @media (min-width: 580px) {
+      display: grid;
+      gap: 12px;
+      grid-template-areas:
+      "ord-title ord-price"
+      "ord-num .";
+    }
   }
 
   &__title {
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 8px;
+
+    @media (min-width: 580px) {
+      grid-area: ord-title;
+      font-size: 20px;
+      margin-bottom: 0;
+    }
   }
 
   &__price {
+    font-size: 16px;
+    margin-bottom: 8px;
+
+    @media (min-width: 580px) {
+      grid-area: ord-price;
+      justify-self: end;
+      font-size: 20px;
+      margin-bottom: 0;
+    }
   }
 
   &__number {
-  }
+    display: inline-block;
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 32px;
+    background-color: #EEEFF2;
 
-  &__delivery-info {
+    @media (min-width: 580px) {
+      grid-area: ord-num;
+      justify-self: start;
+    }
   }
 
   &__link-home {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 12px 24px;
+    border-radius: 32px;
+    border: 1px solid #780096;
+    background-color: #780096;
+    color: #fff;
+    outline: none;
   }
 }
 

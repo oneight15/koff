@@ -1,8 +1,13 @@
 .delivery-info {
+  margin-bottom: 20px;
 
-  &__title {
+  @media (min-width: 580px) {
+    margin-bottom: 24px;
   }
 
-  &__table {
+  &__title {
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 12px;
   }
 }
