@@ -96,14 +96,20 @@
     flex-direction: row-reverse;
     align-items: center;
     gap: 4px;
+    outline: 1px solid transparent;
+    border-radius: 6px;
 
     &:hover,
-    &:active {
+    &:active,
+    &:focus-visible {
       color: #780096;
+
+      svg {
+        fill: #780096;
+      }
     }
 
     &:focus-visible {
-      color: #780096;
       outline-color: #780096;
     }
 
