@@ -1,8 +1,10 @@
+import { FavoriteService } from "../../services/StorageService";
 import { likeSvg } from "../likeSvg/likeSvg";
 
 export class LikeButton {
   constructor(className) {
     this.className = className;
+    this.favoriteService = new FavoriteService();
   }
 
   create(id) {
@@ -11,8 +13,18 @@ export class LikeButton {
     button.dataset.id = id;
     // button.type = 'button';
 
+    if (this.favoriteService.check(id)) {
+      button.classList.add(`${this.className}_active`);
+    }
+
     button.addEventListener('click', () => {
-      console.log('Добавить товар в избранное');
+      if (this.favoriteService.check(id)) {
+        this.favoriteService.remove(id);
+        button.classList.remove(`${this.className}_active`);
+      } else {
+        this.favoriteService.add(id);
+        button.classList.add(`${this.className}_active`);
+      }
     });
 
     likeSvg().then(svg => {
