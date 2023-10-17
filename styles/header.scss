@@ -99,6 +99,10 @@
     outline: 1px solid transparent;
     border-radius: 6px;
 
+    svg {
+      fill: #ffffff;
+    }
+
     &:hover,
     &:active,
     &:focus-visible {
