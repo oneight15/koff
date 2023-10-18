@@ -8,6 +8,8 @@ import { Footer } from './modules/Footer/Footer';
 import { ProductList } from './modules/ProductList/ProductList';
 import { ApiService } from './services/ApiService';
 import { Catalog } from './modules/Catalog/Catalog';
+import { FavoriteService } from './services/StorageService';
+import { Pagination } from './features/Pagination/Pagination';
 
 
 
@@ -57,8 +59,8 @@ const init = () => {
     .on(
       '/',
       async () => {
-        const product = await api.getProducts();
-        new ProductList().mount(new Main().element, product);
+        const products = await api.getProducts();
+        new ProductList().mount(new Main().element, products);
         router.updatePageLinks();
       },
       {
@@ -66,15 +68,21 @@ const init = () => {
           new ProductList().unmount();
           done();
         },
-        already() {
-          console.log('already');
+        already(match) {
+          match.route.handler(match);
         },
       },
     )
     .on('/category',
-      async ({params: {slug}}) => {
-        const product = await api.getProducts();
-        new ProductList().mount(new Main().element, product, slug);
+      async ({params: {slug, page}}) => {
+        const {data: products, pagination} = await api.getProducts({
+          category: slug,
+          page: page || 1,
+        });
+        new ProductList().mount(new Main().element, products, slug);
+        new Pagination()
+          .mount(new ProductList().containerElement)
+          .update(pagination);
         router.updatePageLinks();
       },
       {
@@ -86,14 +94,19 @@ const init = () => {
     )
     .on('/favorite',
       async () => {
-        const product = await api.getProducts();
-        new ProductList().mount(new Main().element, product, 'Избранное');
+        const favorite = new FavoriteService().get();
+        const {data: product} = await api.getProducts({list: favorite.join(',')});
+        new ProductList().mount(new Main().element, product, 'Избранное',
+          'Вы пока ничего не добавили в избранное...');
         router.updatePageLinks();
       },
       {
         leave(done) {
           new ProductList().unmount();
           done();
+        },
+        already(match) {
+          match.route.handler(match);
         },
       },
     )
