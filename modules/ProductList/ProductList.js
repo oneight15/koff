@@ -34,9 +34,9 @@ export class ProductList {
     if (data && data.length) {
       this.updateListElem(data);
     } else {
-      this.containerElement.insertAdjacentHTML('beforeend' `
+      this.containerElement.insertAdjacentHTML('beforeend', `
         <p class="goods__empty">
-          ${emptyText || 'Произошла ошибка, попробуйте снова'}
+          ${emptyText || "Произошла ошибка, попробуйте снова"}
         </p>
       `);
     }

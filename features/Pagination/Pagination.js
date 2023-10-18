@@ -19,13 +19,13 @@ export class Pagination {
       } / ${totalProducts} * 100%)`,
     );
 
-    this.paginationCurrent.textContent = width < totalProducts
-      ? width
-      : width - limit + (totalProducts % limit);
+    this.paginationCurrent.textContent =
+      width < totalProducts ? width : width - limit + (totalProducts % limit);
 
     this.paginationTotal.textContent = totalProducts;
 
     const urlLeft = new URL(window.location.href);
+    console.log('left', urlLeft);
 
     if (currentPage !== 1) {
       urlLeft.searchParams.set('page', currentPage - 1);
@@ -35,10 +35,11 @@ export class Pagination {
     }
 
     const urlRight = new URL(window.location.href);
+    console.log('right', urlRight);
 
     if (currentPage !== totalPages) {
       urlRight.searchParams.set('page', currentPage + 1);
-      this.paginationRight.href = urlLeft.pathname + urlLeft.search;
+      this.paginationRight.href = urlRight.pathname + urlRight.search;
     } else {
       this.paginationRight.removeAttribute('href');
     }
