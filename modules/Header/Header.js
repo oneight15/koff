@@ -1,6 +1,7 @@
 import { addContainer } from "../addContainer";
 import { Logo } from "../../features/Logo/Logo";
 import { likeSvg } from "../../features/likeSvg/likeSvg";
+import { router } from "../../main";
 
 export class Header {
   static instance = null;
@@ -57,6 +58,11 @@ export class Header {
           <path d="M14.6667 14.6666L13.3334 13.3333" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     `;
+
+    searchForm.addEventListener('submit', e => {
+      e.preventDefault();
+      router.navigate(`/search?q=${input.value}`);
+    })
 
     searchForm.append(input, button);
 
