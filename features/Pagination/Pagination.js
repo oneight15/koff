@@ -20,12 +20,15 @@ export class Pagination {
     );
 
     this.paginationCurrent.textContent =
-      width < totalProducts ? width : width - limit + (totalProducts % limit);
+      totalProducts === limit
+        ? totalProducts
+        : width < totalProducts
+          ? width
+          : width - limit + (totalProducts % limit);
 
     this.paginationTotal.textContent = totalProducts;
 
     const urlLeft = new URL(window.location.href);
-    console.log('left', urlLeft);
 
     if (currentPage !== 1) {
       urlLeft.searchParams.set('page', currentPage - 1);
@@ -35,7 +38,6 @@ export class Pagination {
     }
 
     const urlRight = new URL(window.location.href);
-    console.log('right', urlRight);
 
     if (currentPage !== totalPages) {
       urlRight.searchParams.set('page', currentPage + 1);

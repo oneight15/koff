@@ -32,7 +32,7 @@
 
   &__info {
     flex-grow: 1;
-    
+
     @media (min-width: 580px) {
       display: flex;
       gap: 5px;
@@ -104,7 +104,7 @@
 
     &:active {
       color:  #c0f;
-      
+
       svg {
         fill: #c0f;
       }
