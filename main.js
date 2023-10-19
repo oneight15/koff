@@ -48,17 +48,13 @@ const init = () => {
   new Main().mount();
   new Footer().mount();
 
-  api.getProductCategories().then(data => {
-    new Catalog().mount(new Main().element, data);
-    router.updatePageLinks();
-  });
-
   productSlider();
 
   router
     .on(
       '/',
       async () => {
+        new Catalog().mount(new Main().element);
         const products = await api.getProducts();
         new ProductList().mount(new Main().element, products);
         router.updatePageLinks();
@@ -66,6 +62,7 @@ const init = () => {
       {
         leave(done) {
           new ProductList().unmount();
+          new Catalog().unmount();
           done();
         },
         already(match) {
@@ -75,6 +72,7 @@ const init = () => {
     )
     .on('/category',
       async ({params: {slug, page}}) => {
+        new Catalog().mount(new Main().element);
         const {data: products, pagination} = await api.getProducts({
           category: slug,
           page: page || 1,
@@ -88,12 +86,14 @@ const init = () => {
       {
         leave(done) {
           new ProductList().unmount();
+          new Catalog().unmount();
           done();
         },
       },
     )
     .on('/favorite',
       async () => {
+        new Catalog().mount(new Main().element);
         const favorite = new FavoriteService().get();
         const {data: product} = await api.getProducts({list: favorite.join(',')});
         new ProductList().mount(new Main().element, product, 'Избранное',
@@ -103,6 +103,7 @@ const init = () => {
       {
         leave(done) {
           new ProductList().unmount();
+          new Catalog().unmount();
           done();
         },
         already(match) {
